@@ -1,3 +1,8 @@
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,15 +16,23 @@ public class Main{
 
     /**
      * @param args the command line arguments
+     * @args[0] dzień
+     * @args[1] miesiąc
+     * @args[2] mail
+     * @args[3] hasło
+     * @args[4] dzień
+     * @args[5] godzina
      */
     public static void main(String[] args) throws InterruptedException {
         
-        int z = 0;
+        DateFormat formatDate = new SimpleDateFormat("yyyy/MM/dd HH:mm");
     
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         
         ChromeOptions opcje = new ChromeOptions();
         opcje.addArguments("--start-maximized");
+        
+        Date data = new Date(120, Integer.parseInt(args[1]) - 1, Integer.parseInt(args[0]), 00, 00);
         
         WebDriver driver = new ChromeDriver(opcje);
         driver.manage().getCookies();
@@ -27,7 +40,13 @@ public class Main{
         
         driver.get("https://panelklienta.osirursus.pl/login");
         
-        for(int i = 0; i<args.length;){
+        while(!formatDate.format(data).equals(formatDate.format(new Date()))){
+            Thread.sleep(1000);
+//            System.out.println(formatDate.format(data));
+//            System.out.println(formatDate.format(new Date()));
+        }
+        
+        for(int i = 2; i<args.length;){
             //logowanie do panelu klienta
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'username\']")));
             driver.findElement(By.xpath("//*[@id=\'username\']")).sendKeys(args[i++]);
