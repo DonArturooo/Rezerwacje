@@ -20,8 +20,8 @@ public class Main{
      * @args[1] miesiąc
      * @args[2] mail
      * @args[3] hasło
-     * @args[4] dzień
-     * @args[5] godzina
+     * @args[4] dzień rezerwacji
+     * @args[5] godzina rezerwacji
      */
     public static void main(String[] args) throws InterruptedException {
         
