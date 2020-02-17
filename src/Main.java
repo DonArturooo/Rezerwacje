@@ -46,37 +46,32 @@ public class Main{
             //logowanie do panelu klienta
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'username\']")));
             driver.findElement(By.xpath("//*[@id=\'username\']")).sendKeys(args[i++]);
-            Thread.sleep(200);
             driver.findElement(By.xpath("//*[@id=\'password\']")).sendKeys(args[i++]);
-            Thread.sleep(200);
             driver.findElement(By.xpath("//*[@id=\'main\']/div/div/div/div[2]/form/input")).click();
 
 
 
 
             //Rezerwacja
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li[3]")));
-            driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li[3]")).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li[3]"))).click();
             
             if(i < 5){
-                while(!formatDate.format(data).equals(formatDate.format(new Date()))){
-                Thread.sleep(1000);
-    //            System.out.println(formatDate.format(data));
-    //            System.out.println(formatDate.format(new Date()));
-                }
+                while(!formatDate.format(data).equals(formatDate.format(new Date())))
+                    Thread.sleep(1000);
             }
             
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'main\']/div/div/div[2]/div/div/a")));
-            driver.findElement(By.xpath("//*[@id=\'main\']/div/div/div[2]/div/div/a")).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'main\']/div/div/div[2]/div/div/a"))).click();
             
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'main\']/div/div/div[2]/div/label[1]")));
-            driver.findElement(By.xpath("//*[@id=\'main\']/div/div/div[2]/div/label[1]")).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'main\']/div/div/div[2]/div/label[1]"))).click();
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'main\']/div/mwl-calendar/div/mwl-calendar-week/div/div[2]/div[" + args[i] + "]/a")));
-            driver.findElement(By.xpath("//*[@id=\'main\']/div/mwl-calendar/div/mwl-calendar-week/div/div[2]/div[" + args[i++] + "]/a")).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'main\']/div/mwl-calendar/div/mwl-calendar-week/div/div[2]/div[" + args[i] + "]/a"))).click();
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input")));
-            driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input")).sendKeys(args[i++]);
+            WebElement godzina = driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input"));
+            
+            wait.until(ExpectedConditions.visibilityOf(godzina)).click();
+            godzina.clear();
+            godzina.sendKeys(args[i++]);
+            
 
             driver.findElement(By.xpath("//*[@id=\'regulations\']")).click();
 
@@ -84,22 +79,16 @@ public class Main{
             Thread.sleep(200);
             
             if(isElementPresent(driver, By.xpath("/html/body/div[5]/div/div/div[3]/button")));
-            //if(isElementPresent(driver, By.xpath("/html/body/div[5]/div/div/div[3]/button")));
             
             driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[2]/li[4]/a")).click();
 
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/header/nav/div/div[2]/ul[2]/li[4]/ul/li[4]/a"))).click();
         }
         
-        driver.close();
-        
-        
-        //*[@id="main"]/div/mwl-calendar/div/mwl-calendar-week/div/div[2]/div[1]/a
-        //*[@id="main"]/div/mwl-calendar/div/mwl-calendar-week/div/div[2]/div[2]/a
-        //driver.close();   
+        driver.close(); 
     }
 
-    static public boolean isElementPresent(WebDriver driver,By by) {
+    static public boolean isElementPresent(WebDriver driver, By by) {
         try {
             driver.findElement(by).click();
             return true;
