@@ -44,8 +44,7 @@ public class Main{
         
         for(int i = 2; i < args.length;){
             //logowanie do panelu klienta
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'username\']")));
-            driver.findElement(By.xpath("//*[@id=\'username\']")).sendKeys(args[i++]);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'username\']"))).sendKeys(args[i++]);
             driver.findElement(By.xpath("//*[@id=\'password\']")).sendKeys(args[i++]);
             driver.findElement(By.xpath("//*[@id=\'main\']/div/div/div/div[2]/form/input")).click();
 
