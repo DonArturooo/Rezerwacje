@@ -65,11 +65,13 @@ public class Main{
 
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'main\']/div/mwl-calendar/div/mwl-calendar-week/div/div[2]/div[" + args[i] + "]/a"))).click();
 
-            WebElement godzina = driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input"));
             
-            wait.until(ExpectedConditions.visibilityOf(godzina)).click();
-            godzina.clear();
-            godzina.sendKeys(args[i++]);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input"))).click();
+
+            driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]")).clear();
+            driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]")).sendKeys(args[i++]);
+//            driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[1]/td[1]/a/span")).click();
+
             
 
             driver.findElement(By.xpath("//*[@id=\'regulations\']")).click();
@@ -78,6 +80,7 @@ public class Main{
             Thread.sleep(200);
             
             if(isElementPresent(driver, By.xpath("/html/body/div[5]/div/div/div[3]/button")));
+            if(isElementPresent(driver, By.xpath("/html/body/div[4]/div/div/div[3]/button")));
             
             driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[2]/li[4]/a")).click();
 
