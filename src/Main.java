@@ -58,6 +58,9 @@ public class Main {
         
         potwierdzenieRezerwacji(driver, wait, 2, args);
         potwierdzenieRezerwacji(driver1, wait1, 6, args);
+
+        driver.close();
+        driver1.close();
     }
 
     static public boolean isElementPresent(WebDriver driver, By by) {
