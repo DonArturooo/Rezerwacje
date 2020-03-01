@@ -47,14 +47,13 @@ public class Main {
         WebDriver driver1 = new ChromeDriver(opcje);
         WebDriverWait wait1 = new WebDriverWait(driver1, 5000);
         driver1.manage().window().setPosition(new Point(2000, 0));
-        driver1.manage().window().maximize();
-//        
+        driver1.manage().window().maximize();       
         
         logowanie(driver, wait, 2, args);
         logowanie(driver1, wait1, 6, args);
         
 
-//        rezerwacja(driver, wait, 4, args);
+        rezerwacja(driver, wait, 4, args);
         rezerwacja(driver1, wait1, 8, args);
         
         potwierdzenieRezerwacji(driver, wait, 2, args);
