@@ -42,21 +42,19 @@ public class Main {
         opcje.addArguments("--start-maximized");
         
         WebDriver driver = new ChromeDriver(opcje);
-        driver.manage().getCookies();
         WebDriverWait wait = new WebDriverWait(driver, 5000);
         
         WebDriver driver1 = new ChromeDriver(opcje);
-        driver.manage().getCookies();
         WebDriverWait wait1 = new WebDriverWait(driver1, 5000);
         driver1.manage().window().setPosition(new Point(2000, 0));
         driver1.manage().window().maximize();
-        
+//        
         
         logowanie(driver, wait, 2, args);
         logowanie(driver1, wait1, 6, args);
         
 
-        rezerwacja(driver, wait, 4, args);
+//        rezerwacja(driver, wait, 4, args);
         rezerwacja(driver1, wait1, 8, args);
         
         potwierdzenieRezerwacji(driver, wait, 2, args);
@@ -100,17 +98,12 @@ public class Main {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input")));
         System.out.println(driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input")).getAttribute("value"));
         
-        JavascriptExecutor  jse = (JavascriptExecutor)driver;
-        String godzina = (String) jse.executeScript("return arguments[0].value;", driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input")));
-        
-        System.err.println(godzina);
+        String godzina = driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input")).getAttribute("value");
         
         while(!godzina.equals(args[index])){
-          //driver.findElement(By.xpath(xpathExpression)).click();
-          
-          godzina = (String) jse.executeScript("return arguments[0].value;", driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input")));
+          driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[1]/td[1]/a/span")).click();
+          godzina = driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input")).getAttribute("value");
         }
-        //driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[2]/div[2]/div[1]/div/div[2]/div/table[1]/tbody/tr[2]/td[1]/input")).sendKeys(args[index++]);
 
         driver.findElement(By.xpath("//*[@id=\'regulations\']")).click();
 
